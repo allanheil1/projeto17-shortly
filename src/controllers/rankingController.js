@@ -1,4 +1,4 @@
-
+import STATUS_CODE from '../statusCode.js';
 
 async function ranking(req, res){
 

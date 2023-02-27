@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
+import STATUS_CODE from '../statusCode.js';
 
 dotenv.config();
 
