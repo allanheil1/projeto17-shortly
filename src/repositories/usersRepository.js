@@ -1,7 +1,17 @@
-import { connection } from "../database/db.js";
+import connection  from "../database.js";
 
-function validateUniqueEmail() {
-
+function validateUniqueEmail(email) {
+    return connection.query(
+        `
+        SELECT
+            *
+        FROM
+            users
+        WHERE
+            email=$1
+        `,
+        [email]
+    );
 }
 
 function insertUser() {
