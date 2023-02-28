@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import STATUS_CODE from '../statusCode.js';
+import { STATUS_CODE } from '../statusCode.js';
 import { signUpSchema, signInSchema } from '../schemas/signSchema.js';
 import { validateUniqueEmail, validateUserExists } from '../repositories/usersRepository.js';
 
@@ -26,7 +26,7 @@ async function validateSignUp(req, res, next){
     res.locals = user;
 
     next();
-    
+
 }
 
 async function validateSignIn(req, res, next){

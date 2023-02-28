@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import STATUS_CODE from '../statusCode.js';
+import { STATUS_CODE } from '../statusCode.js';
 
 async function shortenUrl(req, res){
 
@@ -7,7 +7,7 @@ async function shortenUrl(req, res){
 
     } catch(error) {
         console.log(error);
-        return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+        return res.status(STATUS_CODE.SERVER_ERROR).send(error);
     }
 
 }
@@ -18,7 +18,7 @@ async function listUrl(req, res){
 
     } catch(error) {
         console.log(error);
-        return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+        return res.status(STATUS_CODE.SERVER_ERROR).send(error);
     }
 
 }
@@ -30,7 +30,7 @@ async function redirectToUrl(req, res){
 
     } catch(error) {
         console.log(error);
-        return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+        return res.status(STATUS_CODE.SERVER_ERROR).send(error);
     }
 
 }
@@ -42,7 +42,7 @@ async function deleteUrl(req, res){
 
     } catch(error) {
         console.log(error);
-        return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+        return res.status(STATUS_CODE.SERVER_ERROR).send(error);
     }
 
 }

@@ -1,4 +1,4 @@
-import STATUS_CODE from '../statusCode.js';
+import { STATUS_CODE } from '../statusCode.js';
 
 async function ranking(req, res){
 
@@ -6,7 +6,7 @@ async function ranking(req, res){
 
     } catch(error) {
         console.log(error);
-        return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+        return res.status(STATUS_CODE.SERVER_ERROR).send(error);
     }
 
 }

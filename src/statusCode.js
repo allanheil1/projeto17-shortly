@@ -9,4 +9,4 @@ const STATUS_CODE = {
     SERVER_ERROR: 500
 }
 
-export default { STATUS_CODE };
+export { STATUS_CODE };

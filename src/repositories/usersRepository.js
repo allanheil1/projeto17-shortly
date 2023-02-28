@@ -14,8 +14,15 @@ function validateUniqueEmail(email) {
     );
 }
 
-function insertUser() {
-
+function insertUser(name, email, encryptedPassword) {
+    return connection.query(
+        `INSERT INTO 
+            users 
+            (name, email, password) 
+        VALUES 
+            ($1, $2, $3);`,
+        [name, email, encryptedPassword]
+      );
 }
 
 function findUser() {
