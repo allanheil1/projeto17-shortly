@@ -42,12 +42,10 @@ async function signIn(req, res){
         token: jwttoken
     };
 
-    console.log(response)
-
     try{
         await findUser(email, password);
 
-        return res.status(200).send(response);
+        return res.status(200).send(jwttoken);
 
     } catch(error) {
         console.log(error);

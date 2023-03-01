@@ -23,7 +23,7 @@ async function validateUrl(req, res, next){
         const isValid = signUpSchema.validate({ url });
     
         if(isValid.error){
-            return res.status(STATUS_CODE.UNPROCESSABLE_ENTITY).send(error);
+            return res.sendStatus(STATUS_CODE.UNPROCESSABLE_ENTITY);
         }
     
         const decode = jwt.verify(token, secret);
