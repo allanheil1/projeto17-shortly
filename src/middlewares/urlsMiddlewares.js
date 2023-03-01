@@ -35,7 +35,7 @@ async function validateUrl(req, res, next){
 
     } catch(error) {
         console.log(error);
-        return res.status(STATUS_CODE.SERVER_ERROR).send(error);
+        return res.status(STATUS_CODE.UNAUTHORIZED).send(error);
     }
 
     res.locals = dataFromJwt;
