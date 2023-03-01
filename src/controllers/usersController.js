@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { STATUS_CODE } from '../statusCode.js';
-import { insertUser } from '../repositories/usersRepository.js';
+import { insertUser, findUser } from '../repositories/usersRepository.js';
 
 dotenv.config();
 
@@ -27,7 +27,25 @@ async function signUp(req, res){
 
 async function signIn(req, res){
 
+    const { email, password, name, id } = res.locals;
+
+    const secret = process.env.SECRET;
+
+    const payload = { 
+        username: name,
+        userId: id
+    };
+
+    const jwttoken = jwt.sign(payload, secret);
+
+    const response = {
+        token: jwttoken
+    };
+
     try{
+        await findUser(email, password);
+
+        return res.status(200).send(response);
 
     } catch(error) {
         console.log(error);

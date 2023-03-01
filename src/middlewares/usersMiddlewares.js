@@ -31,12 +31,40 @@ async function validateSignUp(req, res, next){
 
 async function validateSignIn(req, res, next){
 
-    try{
+    const { email, password } = req.body;
 
-    } catch(error) {
-        console.log(error);
-        return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+    let loginData;
+
+    const isValid = signInSchema.validate(req.body);
+
+    if(isValid.error){
+        return res.status(STATUS_CODE.UNPROCESSABLE_ENTITY).send(error);
     }
+
+    const userExists = await validateUniqueEmail(email);
+
+    if(userExists.rowCount === 0){
+        return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+    }
+
+    const passwordCorrect = bcrypt.compareSync(password, userExists.rows[0].password);
+
+    if(!passwordCorrect){
+        return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+    }
+
+    if(userExists.rowCount > 0 && passwordCorrect){
+        loginData = {
+            email: email,
+            password: userExists.rows[0].password,
+            name: userExists.rows[0].name,
+            id: userExists.rows[0].id
+          };
+    }
+
+    res.locals = loginData;
+
+    next();
 
 }
 
