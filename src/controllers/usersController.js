@@ -42,6 +42,8 @@ async function signIn(req, res){
         token: jwttoken
     };
 
+    console.log(response)
+
     try{
         await findUser(email, password);
 

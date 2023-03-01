@@ -38,7 +38,7 @@ async function validateSignIn(req, res, next){
     const isValid = signInSchema.validate(req.body);
 
     if(isValid.error){
-        return res.status(STATUS_CODE.UNPROCESSABLE_ENTITY).send(error);
+        return res.sendStatus(STATUS_CODE.UNPROCESSABLE_ENTITY);
     }
 
     const userExists = await validateUniqueEmail(email);
