@@ -14,7 +14,7 @@ async function validateSignUp(req, res, next){
     const isValid = signUpSchema.validate(req.body);
 
     if(isValid.error){
-        return res.status(STATUS_CODE.UNPROCESSABLE_ENTITY).send(error);
+        return res.sendStatus(STATUS_CODE.UNPROCESSABLE_ENTITY);
     }
 
     const emailExists = await validateUniqueEmail(user.email);
