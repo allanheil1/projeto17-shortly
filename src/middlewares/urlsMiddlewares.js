@@ -10,7 +10,7 @@ async function validateUrl(req, res, next){
     const { url } = req.body;
     const { authorization } = req.headers;
     const token = authorization?.replace("Bearer ", "");
-    const secret = process.env.SECRET;
+    const secret = process.env.SECRET || 'secretdefault123';
 
     let dataFromJwt;
 
