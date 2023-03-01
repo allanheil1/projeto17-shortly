@@ -32,7 +32,7 @@ async function listUrl(req, res){
 
     try{
         
-        const url = findUrls(id);
+        const url = await findUrls(id);
 
         if(url.rowCount > 0){
             const response = {
