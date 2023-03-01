@@ -15,6 +15,7 @@ function validateUniqueEmail(email) {
 }
 
 function insertUser(name, email, encryptedPassword) {
+
     return connection.query(
         `INSERT INTO 
             users 
