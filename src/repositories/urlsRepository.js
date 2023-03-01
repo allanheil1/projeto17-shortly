@@ -11,8 +11,14 @@ function insertShortenUrl(url, shortenedUrl, userId) {
       );
 }
 
-function findUrls() {
-
+function findUrls(id) {
+    return connection.query(
+        `SELECT * FROM 
+            links 
+        WHERE 
+            id=$1`,
+        [id]
+    );
 }
 
 function findShortUrls() {
