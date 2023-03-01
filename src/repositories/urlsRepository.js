@@ -1,7 +1,14 @@
 import connection  from "../database.js";
 
-function insertShortenUrl() {
-
+function insertShortenUrl(url, shortenedUrl, userId) {
+    return connection.query(
+        `INSERT INTO 
+            links 
+            (url, "shortUrl", "userId") 
+        VALUES 
+            ($1, $2, $3);`,
+        [url, shortenedUrl, userId]
+      );
 }
 
 function findUrls() {
@@ -16,8 +23,8 @@ function updateVisitCount() {
 
 }
 
-function deleteUrl() {
+function deleteUrlDb() {
 
 }
 
-export { insertShortenUrl, findUrls, findShortUrls, updateVisitCount, deleteUrl };
+export { insertShortenUrl, findUrls, findShortUrls, updateVisitCount, deleteUrlDb };
