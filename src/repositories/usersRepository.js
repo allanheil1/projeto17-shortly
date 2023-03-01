@@ -39,8 +39,17 @@ function findUser(email, password) {
       );
 }
 
-function validateUserExists() {
-
+function validateUserExists(userId) {
+    return connection.query(
+        `SELECT 
+            * 
+        FROM 
+            users 
+        WHERE 
+            id=$1 
+        `,
+        [userId]
+      );
 }
 
 function findLinks() {
