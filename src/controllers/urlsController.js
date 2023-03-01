@@ -8,11 +8,16 @@ async function shortenUrl(req, res){
 
     const shortenedUrl = nanoid(8);
 
+    const response = {
+        id: userId,
+        shortUrl: shortenedUrl
+    }
+
     try{
 
         await insertShortenUrl(url, shortenedUrl, userId)
 
-        return res.status(STATUS_CODE.CREATED).send(shortenedUrl);
+        return res.status(STATUS_CODE.CREATED).send(response);
 
     } catch(error) {
         console.log(error);
