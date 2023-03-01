@@ -20,7 +20,7 @@ async function validateUrl(req, res, next){
             return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
         }
     
-        const isValid = signUpSchema.validate({ url });
+        const isValid = urlSchema.validate({ url });
     
         if(isValid.error){
             return res.sendStatus(STATUS_CODE.UNPROCESSABLE_ENTITY);
@@ -38,7 +38,7 @@ async function validateUrl(req, res, next){
         return res.status(STATUS_CODE.SERVER_ERROR).send(error);
     }
 
-    res.locals = data;
+    res.locals = dataFromJwt;
 
     next();
 
