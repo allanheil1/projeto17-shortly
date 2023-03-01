@@ -36,16 +36,16 @@ async function signIn(req, res){
         userId: id
     };
 
-    const jwttoken = jwt.sign(payload, secret);
+    const token = jwt.sign(payload, secret);
 
     const response = {
-        token: jwttoken
+        token: token
     };
 
     try{
         await findUser(email, password);
 
-        return res.status(200).send(jwttoken);
+        return res.status(200).send({ token });
 
     } catch(error) {
         console.log(error);
