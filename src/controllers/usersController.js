@@ -29,7 +29,7 @@ async function signIn(req, res){
 
     const { email, password, name, id } = res.locals;
 
-    const secret = process.env.SECRET;
+    const secret = process.env.SECRET || 'secretdefault123';
 
     const payload = { 
         username: name,
@@ -45,7 +45,7 @@ async function signIn(req, res){
     try{
         await findUser(email, password);
 
-        return res.status(200).send({ token });
+        return res.status(200).send(response);
 
     } catch(error) {
         console.log(error);
