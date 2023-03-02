@@ -31,7 +31,7 @@ function findShortUrls(shortUrl) {
         );
 }
 
-function updateVisitCount(idUrl) {
+function updateVisitCount(id) {
     return connection.query(
         `UPDATE 
             links 
@@ -39,7 +39,7 @@ function updateVisitCount(idUrl) {
             "visitCount"= ("visitCount" + 1) 
         WHERE 
             id=$1`,
-        [idUrl]
+        [id]
       );
 }
 

@@ -65,9 +65,11 @@ async function redirectToUrl(req, res){
 
         if(shortUrlResponse.rowCount > 0){
             const url = `localhost:5000/${shortUrlResponse.rows[0].shortUrl}`;
-            const idUrl = shortUrlResponse.rows[0].idUrl;
+            const id = shortUrlResponse.rows[0].id;
             
-            await updateVisitCount(idUrl);
+            await updateVisitCount(id);
+
+            console.log(id)
 
             return res.redirect(url);
         }else{
