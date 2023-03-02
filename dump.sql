@@ -105,26 +105,33 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: links; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.links VALUES (1, 'https://busy-presentation.org', 'DLtQsDD4', 1, 0, '2023-03-01 19:00:49.514456');
+INSERT INTO public.links VALUES (2, 'https://busy-presentation.org', 'IG9ybqnZ', 1, 0, '2023-03-01 19:07:52.457223');
+INSERT INTO public.links VALUES (3, 'https://busy-presentation.org', 'mH0GpI3o', 1, 0, '2023-03-01 19:09:50.447469');
+INSERT INTO public.links VALUES (4, 'https://busy-presentation.org', 'ilbgW7iK', 1, 0, '2023-03-01 19:10:12.655833');
+INSERT INTO public.links VALUES (6, 'https://busy-presentation.org', 'nLAlzII0', 1, 0, '2023-03-02 19:16:24.336982');
+INSERT INTO public.links VALUES (5, 'https://busy-presentation.org', '3dKz5_vD', 1, 1, '2023-03-01 19:10:42.223465');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.users VALUES (1, 'Bryan', 'Bryan94@yahoo.com', '$2b$10$1e7ywKseiIZWjqHQbriOeez3W04.TmcFtg2e0ck3B7tVqOj1z1rQK', '2023-03-01 17:35:47.163287');
 
 
 --
 -- Name: links_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.links_id_seq', 1, false);
+SELECT pg_catalog.setval('public.links_id_seq', 6, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+SELECT pg_catalog.setval('public.users_id_seq', 1, true);
 
 
 --
