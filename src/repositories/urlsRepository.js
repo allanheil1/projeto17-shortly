@@ -21,13 +21,13 @@ function findUrls(id) {
     );
 }
 
-function findShortUrls(shortUrlParam) {
+function findShortUrls(shortUrl) {
     return connection.query(
         `SELECT * FROM 
             links 
         WHERE 
             "shortUrl"=$1`, 
-        [shortUrlParam]
+        [shortUrl]
         );
 }
 
