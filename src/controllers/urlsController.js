@@ -57,7 +57,22 @@ async function listUrl(req, res){
 
 async function redirectToUrl(req, res){
 
+    const { shortUrlParam } = req.params;
+
     try{
+
+        const shortUrl = await findShortUrls(shortUrlParam);
+
+        if(shortUrl.rowCount > 0){
+            const url = `localhost:5000/${shortUrl.rows[0].shortUrl}`;
+            const idUrl = shortUrl.rows[0].idUrl;
+            
+            await updateVisitCount(idUrl);
+
+            return res.redirect(url);
+        }else{
+            return res.sendStatus(STATUS_CODE.NOT_FOUND);
+        }
 
     } catch(error) {
         console.log(error);

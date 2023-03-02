@@ -21,12 +21,26 @@ function findUrls(id) {
     );
 }
 
-function findShortUrls() {
-
+function findShortUrls(shortUrlParam) {
+    return connection.query(
+        `SELECT * FROM 
+            links 
+        WHERE 
+            "shortUrl"=$1`, 
+        [shortUrlParam]
+        );
 }
 
-function updateVisitCount() {
-
+function updateVisitCount(idUrl) {
+    return connection.query(
+        `UPDATE 
+            links 
+        SET 
+            "visitCount"= ("visitCount" + 1) 
+        WHERE 
+            id=$1`,
+        [idUrl]
+      );
 }
 
 function deleteUrlDb() {
