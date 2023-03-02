@@ -86,7 +86,13 @@ async function redirectToUrl(req, res){
 
 async function deleteUrl(req, res){
 
+    const id = res.locals;
+
     try{
+        
+        await deleteUrlDb(id);
+
+        return res.sendStatus(204);
 
     } catch(error) {
         console.log(error);

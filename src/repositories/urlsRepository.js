@@ -43,8 +43,14 @@ function updateVisitCount(id) {
       );
 }
 
-function deleteUrlDb() {
-
+function deleteUrlDb(id) {
+    return connection.query(
+        `DELETE FROM 
+            links 
+        WHERE 
+            id=$1`,
+         [id]
+    );
 }
 
 export { insertShortenUrl, findUrls, findShortUrls, updateVisitCount, deleteUrlDb };
