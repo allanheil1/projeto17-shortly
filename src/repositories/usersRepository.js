@@ -40,7 +40,7 @@ function findUser(email, password) {
       );
 }
 
-function validateUserExists(userId) {
+function validateUserExists(id) {
     return connection.query(
         `SELECT 
             * 
@@ -49,16 +49,49 @@ function validateUserExists(userId) {
         WHERE 
             id=$1 
         `,
-        [userId]
+        [id]
       );
 }
 
-function findLinks() {
-
+function findLinks(id) {
+    return connection.query(
+        `SELECT 
+            users.id AS id, 
+            users.name AS name, 
+            links.id AS "urlId", 
+            links."shortUrl", 
+            links.url, 
+            links."visitCount" 
+        FROM 
+            links 
+        JOIN 
+            users 
+        ON 
+            links."userId" = users.id 
+        WHERE 
+            links."userId"=$1 
+        GROUP BY 
+            users.id, 
+            users.name, 
+            links.id`,
+        [id]
+      );
 }
 
-function findTotalVisits() {
-
+function findTotalVisits(id) {
+    return connection.query(
+        `SELECT 
+            SUM(links."visitCount") AS "visitCount" 
+        FROM 
+            links
+        JOIN 
+            users 
+        ON 
+            links."userId" = users.id 
+        WHERE 
+            links."userId"=$1`,
+        [id]
+      );
 }
 
 export { validateUniqueEmail, insertUser, findUser, validateUserExists, findLinks, findTotalVisits };

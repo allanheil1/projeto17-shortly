@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { STATUS_CODE } from '../statusCode.js';
-import { insertUser, findUser } from '../repositories/usersRepository.js';
+import { insertUser, findUser, findTotalVisits, findLinks } from '../repositories/usersRepository.js';
 
 dotenv.config();
 
@@ -56,7 +56,28 @@ async function signIn(req, res){
 
 async function getUserLinks(req, res){
 
+    const userId = res.locals;
+
     try{
+
+        const numberOfVisitsResponse = await findTotalVisits(userId);
+        const visitsSum = numberOfVisitsResponse.rows[0].visitCount;
+
+        const linksResponse = await findLinks(userId);
+
+        const response = {
+            id: linksResponse.rows[0].id,
+            name: linksResponse.rows[0].name,
+            visitCount:visitsSum,
+            shortenedUrls: linksResponse.rows.map((row) => ({
+                id: row.urlId,
+                shortUrl: row.shortUrl,
+                url: row.url,
+                visitCount: row.visitCount
+            }))
+        }
+
+        return res.status(STATUS_CODE.OK).send(response);
 
     } catch(error) {
         console.log(error);

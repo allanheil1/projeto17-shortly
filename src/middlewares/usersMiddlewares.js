@@ -70,12 +70,29 @@ async function validateSignIn(req, res, next){
 
 async function validateHeader(req, res, next){
 
-    try{
+    const { authorization } = req.headers;
 
-    } catch(error) {
-        console.log(error);
-        return res.sendStatus(STATUS_CODE.SERVER_ERROR);
+    const token = authorization?.replace('Bearer ', '');
+
+    const secret = process.env.SECRET || 'secretdefault123';
+
+    const decode = jwt.verify(token, secret);
+
+    if(!decode){
+        return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
     }
+
+    const userId = decode.userId;
+
+    const userExists = validateUserExists(userId);
+
+    if(userExists.rowCount <= 0){
+        return res.sendStatus(STATUS_CODE.NOT_FOUND);
+    }
+
+    res.locals = userId;
+
+    next();
 
 }
 
