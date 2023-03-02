@@ -1,5 +1,5 @@
 import { STATUS_CODE } from '../statusCode.js';
-import findRanking from '../repositories/rankingRepository.js';
+import { findRanking } from '../repositories/rankingRepository.js';
 
 async function ranking(req, res){
 
@@ -7,7 +7,7 @@ async function ranking(req, res){
 
         const getFromDb = await findRanking();
 
-        const ranking = getFromDb.rows();
+        const ranking = getFromDb.rows;
 
         const response = ranking.map((r) => ({
             id: r.id,

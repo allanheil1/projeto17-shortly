@@ -23,4 +23,4 @@ function findRanking() {
 
 }
 
-export default { findRanking };
+export { findRanking };
