@@ -76,23 +76,32 @@ async function validateHeader(req, res, next){
 
     const secret = process.env.SECRET || 'secretdefault123';
 
-    const decode = jwt.verify(token, secret);
+    try{
+        const decode = jwt.verify(token, secret);
 
-    if(!decode){
+        if(!decode){
+            return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
+        }
+    
+        const userId = decode.userId;
+    
+        const userExists = validateUserExists(userId);
+    
+        if(userExists.rowCount <= 0){
+            return res.sendStatus(STATUS_CODE.NOT_FOUND);
+        }
+    
+        res.locals = userId;
+    
+        next();
+
+    } catch(error) {
         return res.sendStatus(STATUS_CODE.UNAUTHORIZED);
     }
 
-    const userId = decode.userId;
+    
 
-    const userExists = validateUserExists(userId);
-
-    if(userExists.rowCount <= 0){
-        return res.sendStatus(STATUS_CODE.NOT_FOUND);
-    }
-
-    res.locals = userId;
-
-    next();
+    
 
 }
 
