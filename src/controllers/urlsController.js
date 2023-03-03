@@ -69,8 +69,6 @@ async function redirectToUrl(req, res){
             
             await updateVisitCount(id);
 
-            console.log(id)
-
             return res.redirect(url);
         }else{
             return res.sendStatus(STATUS_CODE.NOT_FOUND);
